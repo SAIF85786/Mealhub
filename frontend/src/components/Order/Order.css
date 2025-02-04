@@ -1,0 +1,12 @@
+.orderpage .searchbar {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  margin: 20px 10px;
+  gap: 10px;
+}
+
+.orderpage .search-result {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
