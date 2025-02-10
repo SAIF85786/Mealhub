@@ -5,7 +5,7 @@ import { Button, Card, Container, Stack } from "react-bootstrap";
 
 export default function Home() {
   const navigate = useNavigate();
-  console.log("Iam hoem apage");
+
   return (
     <div className="homepage">
       <div className="hero-section">

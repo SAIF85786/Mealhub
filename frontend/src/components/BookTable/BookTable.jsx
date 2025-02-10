@@ -80,7 +80,7 @@ export default function BookTable() {
                 <Form.Control
                   type="number"
                   min="1"
-                  max="10"
+                  max="6"
                   value={formData.guests}
                   onChange={(e) =>
                     setFormData({ ...formData, guests: e.target.value })
