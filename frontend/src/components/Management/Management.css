@@ -1,0 +1,41 @@
+.managementpage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.managementpage .section {
+  padding: 1rem;
+  border-radius: 10px;
+  height: calc(100vh - 56px - 2rem);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.managementpage .section .btn .bi-plus {
+  font-size: 1.3rem;
+  margin: auto;
+  position: relative;
+  top: 1px;
+}
+
+.managementpage .section .list {
+  overflow-y: auto;
+  margin-top: 1rem;
+  height: calc(100% - 50px);
+}
+
+.managementpage .section .list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.managementpage .section .list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.managementpage .section .list::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 8px;
+}

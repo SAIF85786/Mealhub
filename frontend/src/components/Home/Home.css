@@ -1,0 +1,60 @@
+.homepage .hero-section {
+  background-color: bisque;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2) url("/assets/images/bg1.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  gap: 10px;
+  height: 400px;
+  justify-content: center;
+  color: white;
+}
+
+.homepage .hero-section .btn-ordernow {
+  background-color: #f3410f;
+  border: none;
+}
+
+.homepage .actual-services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.homepage .actual-services .service-card:hover {
+  transition: all 0.2s linear;
+  box-shadow: 0px 0px 5px 0px #000;
+  cursor: pointer;
+}
+
+.homepage .actual-services .service-card .card-title {
+  text-align: center;
+}
+
+.homepage .services {
+  margin: 20px 10px;
+}
+
+.homepage .services .cards {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+.homepage .services .cards .card {
+  flex: 1;
+}
+
+.homepage l.services .cards .card-img {
+  width: 90%;
+  padding: 10px;
+  margin: auto;
+}

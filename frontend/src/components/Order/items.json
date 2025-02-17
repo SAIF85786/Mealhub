@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "id": 381778,
+      "title": "Cowboy Burger",
+      "image": "https://spoonacular.com/menuItemImages/hamburger.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Sam & Louie's Ny Pizza",
+      "servings": {
+        "number": 1,
+        "size": null,
+        "unit": null
+      }
+    },
+    {
+      "id": 387582,
+      "title": "Combo Pizza (Slice)",
+      "image": "https://img.spoonacular.com/menu-items/387582.png",
+      "imageType": "png",
+      "restaurantChain": "Pizza My Heart",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "slice"
+      }
+    },
+
+    {
+      "id": 371488,
+      "title": "Chicken Strips",
+      "image": "https://spoonacular.com/menuItemImages/chicken-strips.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Ryan's Grill Buffet Bakery",
+      "servings": {
+        "number": 1,
+        "size": 56,
+        "unit": "G"
+      }
+    },
+    {
+      "id": 332833,
+      "title": "Thai Coconut Chicken Curry Soup",
+      "image": "https://img.spoonacular.com/menu-items/332833.png",
+      "imageType": "png",
+      "restaurantChain": "Specialty's Cafe & Bakery",
+      "servings": {
+        "number": 1,
+        "size": 1,
+        "unit": "bowl"
+      }
+    },
+    {
+      "id": 319264,
+      "title": "Curried Cauliflower and Chickpea Soup",
+      "image": "https://spoonacular.com/menuItemImages/potato-curry.jpg",
+      "imageType": "jpg",
+      "restaurantChain": "Hale and Hearty Soups",
+      "servings": {
+        "number": 1,
+        "size": 8,
+        "unit": "oz"
+      }
+    }
+  ]
+}
