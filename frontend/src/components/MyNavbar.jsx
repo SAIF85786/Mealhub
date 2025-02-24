@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector } from "react-redux";
@@ -27,6 +27,9 @@ export default function MyNavbar() {
         <Nav.Link href="#" onClick={() => navigate("/menu")}>
           Menu
         </Nav.Link>
+        <Nav.Link href="#" onClick={() => navigate("/myorders")}>
+          My Orders
+        </Nav.Link>
       </Nav>
       {isLogin ? (
         <motion.div
@@ -48,6 +51,10 @@ export default function MyNavbar() {
             onClick={() => navigate("/profile")} // Redirect to profile page
           >
             {name.charAt(0).toUpperCase()} {/* First letter of name */}
+          </div>
+          {/* <Image src="/assets/icons/dish.png" height={40} width={40} /> */}
+          <div className="cart-icon fs-2">
+            <i className="bi bi-cart2"></i>
           </div>
         </motion.div>
       ) : (

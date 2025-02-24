@@ -1,0 +1,5 @@
+// custom.scss
+$primary: #ffc107; // Replace with your desired color
+
+// Import Bootstrap after overriding the variable
+@import "bootstrap/scss/bootstrap";

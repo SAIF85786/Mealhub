@@ -1,31 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function BookTable() {
+  const navigate = useNavigate();
+  const { name, email, phone } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
-    user_id: "12345", // Replace with actual user ID
-    table_id: "67890", // Replace with available table
+    name,
+    email,
+    phone,
     date: new Date(),
     time: "19:00",
     guests: 2,
-    contact: { name: "", phone: "", email: "" },
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      contact: { ...formData.contact, [name]: value },
-    });
-  };
+  const isLogin = useSelector((state) => state.user.isLogin);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+
+    // Combine date and time
+    const selectedDate = formData.date;
+    const [hours, minutes] = formData.time.split(":").map(Number); // Extract hours and minutes
+
+    // Set the hours and minutes to the selected date
+    selectedDate.setHours(hours, minutes, 0, 0);
+
+    // Convert to ISO format for MongoDB
+    const bookingDateTime = selectedDate.toISOString();
+
+    console.log("Booking Date & Time (ISO):", bookingDateTime);
+
+    // Example: Store this bookingDateTime in MongoDB
+    const bookingData = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      guests: formData.guests,
+      dateTime: bookingDateTime, // Store as a single DateTime field
+    };
+
+    console.log("Booking Data:", bookingData);
     alert("Booking Submitted! (Replace this with API call)");
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      alert("login first");
+      navigate("/auth/login");
+    }
+  }, []);
 
   return (
     <Container className="mt-5 mb-5">
@@ -45,36 +72,6 @@ export default function BookTable() {
           <div className="shadow-lg p-4 bg-white rounded">
             <h2 className="text-center mb-4">Book a Table</h2>
             <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Phone</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="phone"
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  onChange={handleChange}
-                  required
-                />
-              </Form.Group>
-
               <Form.Group className="mb-3">
                 <Form.Label>Guests</Form.Label>
                 <Form.Control

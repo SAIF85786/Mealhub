@@ -65,6 +65,7 @@ const userSlice = createSlice({
     address: "",
     chefs: [],
     waiters: [],
+    reservedTables: [],
   },
   reducers: {
     changeRole: (state, action) => {

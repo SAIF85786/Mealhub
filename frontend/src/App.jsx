@@ -16,6 +16,7 @@ import Account from "./components/Account/Account";
 import Signup from "./components/Account/SignUp";
 import Login from "./components/Account/Login";
 import Menu from "./components/Menu/Menu";
+import MyCart from "./components/MyCart/MyCart";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,8 @@ function App() {
           <Route path="signup" element={<Signup />} />
         </Route>
         <Route path="/order" element={<Order />} />
+        <Route path="/myorders" element={<MyCart />} />
+
         <Route path="/book-table" element={<BookTable />} />
         <Route path="/management" element={<Management />} />
         <Route path="/waiter" element={<WaiterPage />} />
