@@ -1,6 +1,12 @@
 import "./App.css";
 import MyNavbar from "./components/MyNavbar";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router";
 import Home from "./components/Home/Home";
 import Order from "./components/Order/Order";
 import Management from "./components/Management/Management";
@@ -17,10 +23,14 @@ import Signup from "./components/Account/SignUp";
 import Login from "./components/Account/Login";
 import Menu from "./components/Menu/Menu";
 import MyCart from "./components/MyCart/MyCart";
+import PaymentPage from "./components/Payment/PaymentPage";
+import MyOrders from "./components/Order/MyOrders";
+import ProfilePage from "./components/profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const role = useSelector((state) => state.user.role);
   useEffect(() => {
     const role = Cookies.get("role");
@@ -37,15 +47,16 @@ function App() {
   }, [role]);
   return (
     <>
-      <MyNavbar />
+      {location.pathname !== "/payment" && <MyNavbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Account />}>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
         </Route>
-        <Route path="/order" element={<Order />} />
-        <Route path="/myorders" element={<MyCart />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        {/* <Route path="/order" element={<Order />} /> */}
+        <Route path="/mycart" element={<MyCart />} />
 
         <Route path="/book-table" element={<BookTable />} />
         <Route path="/management" element={<Management />} />
@@ -53,6 +64,9 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/chef" element={<ChefPage />} />
         <Route path="/select-role" element={<SelectRole />} />
+
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/myorders" element={<MyOrders />} />
       </Routes>
     </>
   );

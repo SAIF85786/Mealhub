@@ -21,11 +21,15 @@ export default function MyNavbar() {
         <Nav.Link href="#" onClick={() => navigate("/")}>
           Home
         </Nav.Link>
-        <Nav.Link href="#" onClick={() => navigate("/order")}>
+
+        {/* <Nav.Link href="#" onClick={() => navigate("/order")}>
           Order
-        </Nav.Link>
+        </Nav.Link> */}
         <Nav.Link href="#" onClick={() => navigate("/menu")}>
           Menu
+        </Nav.Link>
+        <Nav.Link href="#" onClick={() => navigate("/mycart")}>
+          My Cart
         </Nav.Link>
         <Nav.Link href="#" onClick={() => navigate("/myorders")}>
           My Orders

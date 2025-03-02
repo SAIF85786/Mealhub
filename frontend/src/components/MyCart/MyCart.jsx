@@ -9,12 +9,14 @@ import {
   Col,
   Form,
 } from "react-bootstrap";
-import { addToCart, removeFromCart } from "../../store/slices/orderSlice";
+import { addToCart, removeFromCart } from "../../store/slices/cartSlice";
 import { menu } from "../../store/menu";
+import { useNavigate } from "react-router";
 
 export default function MyCart() {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.order.cart);
+  const cartItems = useSelector((state) => state.cart.cart);
+  const navigate = useNavigate();
 
   // Get only selected items from the menu
   const selectedItems = menu.menu.filter((item) => cartItems[item._id]);
@@ -29,6 +31,17 @@ export default function MyCart() {
   const cgst = subtotal * CGST_RATE;
   const sgst = subtotal * SGST_RATE;
   const totalBill = subtotal + cgst + sgst;
+
+  const Qty = selectedItems.map((val) => [
+    val.name,
+    val.price,
+    cartItems[val._id],
+  ]);
+  const handlePlaceOrder = () => {
+    navigate("/payment", {
+      state: { amount: totalBill.toFixed(2) },
+    });
+  };
 
   return (
     <Container className="mt-4">
@@ -136,7 +149,7 @@ export default function MyCart() {
 
           {/* Place Order Button */}
           <div className="text-center mt-4">
-            <Button variant="success" size="lg">
+            <Button variant="success" size="lg" onClick={handlePlaceOrder}>
               Place Order (₹{totalBill.toFixed(2)})
             </Button>
           </div>

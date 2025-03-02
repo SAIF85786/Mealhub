@@ -3,13 +3,13 @@ import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { menu } from "./../../store/menu";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../../store/slices/orderSlice";
+import { addToCart, removeFromCart } from "../../store/slices/cartSlice";
 
 const menuItems = menu.menu;
 
 const Menu = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.order.cart);
+  const cartItems = useSelector((state) => state.cart.cart);
 
   useEffect(() => {
     console.log(cartItems);

@@ -4,8 +4,8 @@ const initialState = {
   cart: {}, // Stores item _id as key and quantity as value
 };
 
-const orderSlice = createSlice({
-  name: "order",
+const cartSlice = createSlice({
+  name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -26,8 +26,11 @@ const orderSlice = createSlice({
         }
       }
     },
+    clearCart: (state) => {
+      state.cart = {};
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = orderSlice.actions;
-export default orderSlice.reducer;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export default cartSlice.reducer;

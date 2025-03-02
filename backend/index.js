@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connectDatabase } from "./database.js";
 import authRouter from "./src/routes/auth.js";
+import customerRouter from "./src/routes/customer.js";
 
 dotenv.config();
 const conStr = process.env.DATABASE;
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth/", authRouter);
+app.use("/api/customer/", customerRouter);
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
