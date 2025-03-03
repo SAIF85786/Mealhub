@@ -18,6 +18,7 @@ export default function Management() {
     if (role !== "Manager") navigate("/");
   }, [role, navigate]);
 
+  if (role !== "Manager") return null;
   return (
     <>
       <ChefForm

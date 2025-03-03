@@ -10,6 +10,6 @@ export function connectDatabase(conStr) {
   });
 
   db.once("open", () => {
-    console.log("Database Conected Successfully");
+    console.log("Database Connected Successfully");
   });
 }

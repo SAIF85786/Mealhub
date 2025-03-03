@@ -79,6 +79,20 @@ const userSlice = createSlice({
       state.address = address;
       state.role = role;
     },
+    logout: (state) => {
+      // Reset all user state to initial values
+      state.role = "Select Role";
+      state.authtoken = "";
+      state.isLogin = false;
+      state.message = "";
+      state.name = "";
+      state.email = "";
+      state.phone = null;
+      state.address = "";
+      state.chefs = [];
+      state.waiters = [];
+      state.reservedTables = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -122,5 +136,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { changeRole, setSignUpUser } = userSlice.actions;
+export const { changeRole, setSignUpUser, logout } = userSlice.actions;
 export default userSlice.reducer;
