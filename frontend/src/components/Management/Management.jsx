@@ -4,21 +4,28 @@ import { motion } from "framer-motion";
 import "./Management.css";
 import ChefForm from "./ChefForm";
 import WaiterForm from "./WaiterForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { fetchChefs, fetchWaiters } from "../../store/slices/userSlice";
 
 export default function Management() {
   const navigate = useNavigate();
   const [showChefForm, setShowChefForm] = useState(false);
   const [showWaiterForm, setShowWaiterForm] = useState(false);
-  const role = useSelector((state) => state.user.role);
-  const { chefs, waiters } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { chefs, waiters, role, isLogin } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (role !== "Manager") navigate("/");
-  }, [role, navigate]);
+    if (!isLogin) navigate("/auth/login");
+  }, [role]);
 
-  if (role !== "Manager") return null;
+  useEffect(() => {
+    dispatch(fetchChefs());
+    dispatch(fetchWaiters());
+  }, []);
+
+  if (role !== "Manager" || !isLogin) return null;
   return (
     <>
       <ChefForm

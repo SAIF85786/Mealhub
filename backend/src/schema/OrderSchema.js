@@ -16,13 +16,13 @@ const OrderSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
   paymentMethod: {
     type: String,
-    enum: ["Card", "UPI"], // currently Card and UPI are supported
+    enum: ["card", "upi"], // currently Card and UPI are supported
     required: true,
   },
   orderStatus: {
     type: String,
     enum: ["Placed", "Preparing", "Ready", "Completed", "Cancelled"], // will change later
-    default: "Completed",
+    default: "Placed",
   },
   assignedChef: {
     type: mongoose.Schema.Types.ObjectId,

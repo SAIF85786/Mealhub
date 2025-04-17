@@ -50,15 +50,14 @@ const OrdersList = () => {
   // Get the appropriate status class
   const getStatusClass = (status) => {
     const statusMap = {
-      Pending: "status-pending",
-      Confirmed: "status-confirmed",
+      Placed: "status-placed",
       Preparing: "status-preparing",
-      "Out for Delivery": "status-out-for-delivery",
-      Delivered: "status-delivered",
+      Ready: "status-ready",
+      Completed: "status-completed",
       Cancelled: "status-cancelled",
     };
 
-    return statusMap[status] || "status-pending";
+    return statusMap[status];
   };
 
   // Calculate total price for an order item

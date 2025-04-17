@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { useDispatch, useSelector } from "react-redux";
-import { signInUser } from "../../store/slices/userSlice";
+import { resetMessage, signInUser } from "../../store/slices/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { isPending, message } = useSelector((state) => state.user);
+  const { isPending, message, role } = useSelector((state) => state.user);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -23,11 +23,15 @@ const Login = () => {
     dispatch(signInUser(formData));
   };
 
+  useEffect(() => {
+    dispatch(resetMessage());
+  }, []);
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-md-center">
         <Col md={6}>
-          <h2 className="text-center">User Login</h2>
+          <h2 className="text-center">{role} Login</h2>
 
           {message && <p className="text-danger text-center">{message}</p>}
 
@@ -64,9 +68,11 @@ const Login = () => {
             </Button>
           </Form>
 
-          <p className="text-center mt-3">
-            New user? <Link to="/auth/signup">Sign up here</Link>
-          </p>
+          {(role === "Customer" || role === "Manager") && (
+            <p className="text-center mt-3">
+              New {role}? <Link to="/auth/signup">Sign up here</Link>
+            </p>
+          )}
         </Col>
         <Col
           md={6}

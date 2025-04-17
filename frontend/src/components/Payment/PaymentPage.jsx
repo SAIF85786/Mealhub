@@ -4,6 +4,7 @@ import "./PaymentPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { menu } from "../../store/menu";
 import { clearCart } from "../../store/slices/cartSlice";
+import SuccessAnimation from "./SuccessAnimation";
 
 export default function PaymentPage() {
   const location = useLocation();
@@ -21,7 +22,6 @@ export default function PaymentPage() {
   }, [amount, navigate]);
 
   if (!amount) return null; // Prevent rendering before redirect
-  if (!token) navigate("/auth/login");
 
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [cardDetails, setCardDetails] = useState({
@@ -31,7 +31,7 @@ export default function PaymentPage() {
     cvv: "",
   });
   const [upiId, setUpiId] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState("idle"); // 'idle' | 'processing' | 'done'
   const [error, setError] = useState("");
   const MealHubBackend = import.meta.env.VITE_BACKEND_SERVER;
 
@@ -88,7 +88,7 @@ export default function PaymentPage() {
   };
 
   const handleCancel = () => {
-    navigate(-1);
+    navigate("/mycart");
   };
 
   const fetchCustId = async () => {
@@ -145,7 +145,8 @@ export default function PaymentPage() {
       // ],
       items,
       totalAmount: totalBill,
-      paymentMethod: "Card",
+      paymentMethod: paymentMethod,
+      orderStatus: "Placed",
       deliveryType: "Dine-in",
     };
 
@@ -166,8 +167,10 @@ export default function PaymentPage() {
       if (!response.ok) {
         throw new Error(data.message || "Failed to create order");
       }
+      return { status: "success" };
     } catch (error) {
       console.error("Error creating order:", error);
+      return { status: "failed" };
     }
   };
 
@@ -185,17 +188,24 @@ export default function PaymentPage() {
     }
 
     // Simulate payment processing
-    setIsProcessing(true);
-    // setTimeout(() => {
-    //   setIsProcessing(false);
-
-    //   // make api call to send the order to database
-    // }, 2000);
-    await createOrder();
-    dispatch(clearCart());
-    setIsProcessing(false);
-    navigate("/myorders");
+    setPaymentStatus("processing");
+    setTimeout(async () => {
+      // alert("Payment done successfully now show a done animation");
+      // make api call to send the order to database
+      try {
+        const { status } = await createOrder();
+        if (status === "failed") throw new Error();
+        setPaymentStatus("done");
+        dispatch(clearCart());
+        setTimeout(() => navigate("/myorders"), 3000);
+      } catch (error) {
+        alert("Payment failed");
+        setPaymentStatus("idle");
+      }
+    }, 2000);
   };
+
+  if (paymentStatus === "done") return <SuccessAnimation />;
 
   return (
     <div className="payment-container">
@@ -290,8 +300,14 @@ export default function PaymentPage() {
         )}
 
         <div className="button-container">
-          <button type="submit" disabled={isProcessing} className="pay-button">
-            {isProcessing ? "Processing..." : `Pay ₹${amount}`}
+          <button
+            type="submit"
+            disabled={paymentStatus === "processing"}
+            className="pay-button"
+          >
+            {paymentStatus === "processing"
+              ? "Processing..."
+              : `Pay ₹${amount}`}
           </button>
 
           <button

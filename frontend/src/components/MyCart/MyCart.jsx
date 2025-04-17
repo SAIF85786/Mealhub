@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
@@ -20,7 +20,7 @@ export default function MyCart() {
 
   // Get only selected items from the menu
   const selectedItems = menu.menu.filter((item) => cartItems[item._id]);
-
+  console.log(selectedItems.length);
   // Calculate the bill
   const subtotal = selectedItems.reduce(
     (acc, item) => acc + item.price * cartItems[item._id],

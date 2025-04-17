@@ -21,14 +21,14 @@ export default function Home() {
         </div>
       </div>
       <div className="p-3 actual-services">
-        <Card onClick={() => navigate("/order")} className="service-card p-2">
+        <Card onClick={() => navigate("/menu")} className="service-card p-2">
           <Card.Img src="assets/icons/add.png"></Card.Img>
           <Card.Body>
             <Card.Title>Order Food</Card.Title>
           </Card.Body>
         </Card>
         <Card
-          onClick={() => navigate("book-table")}
+          onClick={() => navigate("/book-table")}
           className="service-card p-2"
         >
           <Card.Img src="assets/icons/reservation.png"></Card.Img>
@@ -36,7 +36,7 @@ export default function Home() {
             <Card.Title>Book Table</Card.Title>
           </Card.Body>
         </Card>
-        <Card className="service-card p-2">
+        {/* <Card className="service-card p-2">
           <Card.Img src="assets/icons/reservation.png"></Card.Img>
           <Card.Body>
             <Card.Title>Book Table</Card.Title>
@@ -47,7 +47,7 @@ export default function Home() {
           <Card.Body>
             <Card.Title>Book Table</Card.Title>
           </Card.Body>
-        </Card>
+        </Card> */}
       </div>
     </div>
   );

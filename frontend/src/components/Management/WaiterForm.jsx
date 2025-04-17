@@ -8,6 +8,8 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { fetchWaiters } from "../../store/slices/userSlice";
 
 export default function WaiterForm({ show, handleClose }) {
   const [formData, setFormData] = useState({
@@ -25,7 +27,7 @@ export default function WaiterForm({ show, handleClose }) {
     password: "",
     confirmPassword: "",
   });
-
+  const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -81,6 +83,8 @@ export default function WaiterForm({ show, handleClose }) {
           password: "",
           confirmPassword: "",
         });
+
+        dispatch(fetchWaiters());
       } else {
         alert(`Error: ${data.message}`);
       }

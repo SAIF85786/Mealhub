@@ -51,6 +51,42 @@ export const signInUser = createAsyncThunk(
   }
 );
 
+// fetch chefs from backend
+export const fetchChefs = createAsyncThunk(
+  "user/fetchChefs",
+  async (userCredentials, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${MealHubBackend}/api/chefs`);
+      const data = await response.json();
+      console.log(data);
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch Chefs");
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// fetch waiters from backend
+export const fetchWaiters = createAsyncThunk(
+  "user/fetchWaiters",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${MealHubBackend}/api/waiters`);
+      const data = await response.json();
+      console.log(data);
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to fetch Waiters");
+      }
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -81,7 +117,6 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       // Reset all user state to initial values
-      state.role = "Select Role";
       state.authtoken = "";
       state.isLogin = false;
       state.message = "";
@@ -92,6 +127,12 @@ const userSlice = createSlice({
       state.chefs = [];
       state.waiters = [];
       state.reservedTables = [];
+    },
+    resetMessage: (state) => {
+      state.message = "";
+    },
+    updateReservedTables: (state, action) => {
+      state.reservedTables = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -132,9 +173,21 @@ const userSlice = createSlice({
       .addCase(signInUser.rejected, (state, action) => {
         state.isPending = false;
         state.message = action.payload;
+      })
+      .addCase(fetchChefs.fulfilled, (state, action) => {
+        state.chefs = action.payload;
+      })
+      .addCase(fetchWaiters.fulfilled, (state, action) => {
+        state.waiters = action.payload;
       });
   },
 });
 
-export const { changeRole, setSignUpUser, logout } = userSlice.actions;
+export const {
+  changeRole,
+  setSignUpUser,
+  logout,
+  resetMessage,
+  updateReservedTables,
+} = userSlice.actions;
 export default userSlice.reducer;
