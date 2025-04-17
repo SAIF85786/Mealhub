@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 
 export default function MyNavbar() {
   const { isLogin, name } = useSelector((state) => state.user);
+  const role = useSelector((state) => state.user.role);
 
   const navigate = useNavigate();
   return (
@@ -16,24 +17,16 @@ export default function MyNavbar() {
       data-bs-theme="light"
       style={{ margin: "0px 10px", backgroundColor: "#00000055" }}
     >
-      <Navbar.Brand href="/">MealHub</Navbar.Brand>
+      <Navbar.Brand onClick={() => navigate("/")}>MealHub</Navbar.Brand>
       <Nav className="me-auto">
-        <Nav.Link href="#" onClick={() => navigate("/")}>
-          Home
-        </Nav.Link>
-
-        {/* <Nav.Link href="#" onClick={() => navigate("/order")}>
-          Order
-        </Nav.Link> */}
-        <Nav.Link href="#" onClick={() => navigate("/menu")}>
-          Menu
-        </Nav.Link>
-        <Nav.Link href="#" onClick={() => navigate("/mycart")}>
-          My Cart
-        </Nav.Link>
-        <Nav.Link href="#" onClick={() => navigate("/myorders")}>
-          My Orders
-        </Nav.Link>
+        {role === "Customer" && (
+          <>
+            <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
+            <Nav.Link onClick={() => navigate("/menu")}>Menu</Nav.Link>
+            <Nav.Link onClick={() => navigate("/mycart")}>My Cart</Nav.Link>
+            <Nav.Link onClick={() => navigate("/myorders")}>My Orders</Nav.Link>
+          </>
+        )}
       </Nav>
       {isLogin ? (
         <motion.div
@@ -63,16 +56,23 @@ export default function MyNavbar() {
         </motion.div>
       ) : (
         <>
-          <Button variant="outline-dark" onClick={() => navigate("auth/login")}>
-            Sign In
-          </Button>
-          <Button
-            variant="dark"
-            style={{ marginLeft: 5 }}
-            onClick={() => navigate("auth/signup")}
-          >
-            Sign Up
-          </Button>
+          {role !== "Select Role" && (
+            <Button
+              variant="outline-dark"
+              onClick={() => navigate("auth/login")}
+            >
+              Sign In
+            </Button>
+          )}
+          {(role === "Customer" || role === "Manager") && (
+            <Button
+              variant="dark"
+              style={{ marginLeft: 5 }}
+              onClick={() => navigate("auth/signup")}
+            >
+              Sign Up
+            </Button>
+          )}
         </>
       )}
     </Navbar>

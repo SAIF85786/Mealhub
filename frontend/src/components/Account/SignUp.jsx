@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setSignUpUser, signUpUser } from "../../store/slices/userSlice";
+import {
+  resetMessage,
+  setSignUpUser,
+  signUpUser,
+} from "../../store/slices/userSlice";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const { message, isPending, isLogin } = useSelector((state) => state.user);
+  const { message, isPending, isLogin, role } = useSelector(
+    (state) => state.user
+  );
 
   const [formData, setFormData] = useState({
     name: "",
@@ -32,7 +38,7 @@ const Signup = () => {
 
     const user = {
       ...formData,
-      role: "Customer",
+      role,
       orderHistory: [],
       reservationHistory: [],
       status: "Active",
@@ -42,13 +48,16 @@ const Signup = () => {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        role: "Customer",
+        role,
         address: formData.address,
       })
     );
     dispatch(signUpUser(user));
   };
 
+  useEffect(() => {
+    dispatch(resetMessage());
+  }, []);
   return (
     <Container className="mt-5">
       <Row className="justify-content-md-center">
@@ -62,7 +71,7 @@ const Signup = () => {
         </Col>
 
         <Col md={6}>
-          <h2 className="text-center">User Signup</h2>
+          <h2 className="text-center">{role} Signup</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="name">
               <Form.Label>Name</Form.Label>

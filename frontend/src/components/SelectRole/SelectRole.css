@@ -1,0 +1,8 @@
+.fullscreen-center {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; /* same as bg-light */
+  }
+  

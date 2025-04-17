@@ -39,7 +39,7 @@ router.post("/signup", async (req, res) => {
       name,
       email,
       phone,
-      role: "Customer",
+      role,
       dob,
       address,
       password: hashedPassword,
@@ -56,7 +56,7 @@ router.post("/signup", async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    res.status(201).json({ message: "User registered successfully", token });
+    res.status(201).json({ message: `${role} registered successfully`, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });

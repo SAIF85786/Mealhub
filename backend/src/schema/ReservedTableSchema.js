@@ -34,6 +34,9 @@ const ReservedTableSchema = new mongoose.Schema({
   date: {
     type: Date,
     required: true, // Ensures the date is always provided
+    index: {
+      expireAfterSeconds: 0,
+    },
   },
 });
 

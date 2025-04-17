@@ -58,3 +58,8 @@
   padding: 10px;
   margin: auto;
 }
+
+.homepage .actual-services .service-card img {
+  height: 150px;
+  object-fit: contain; 
+}

@@ -75,12 +75,12 @@
     letter-spacing: 0.5px;
   }
   
-  .status-pending {
+  .status-placed {
     background-color: #fff8e6;
     color: #f5a623;
   }
   
-  .status-confirmed {
+  .status-ready {
     background-color: #e6f7ff;
     color: #1890ff;
   }
@@ -90,12 +90,7 @@
     color: #13c2c2;
   }
   
-  .status-out-for-delivery {
-    background-color: #f6ffed;
-    color: #52c41a;
-  }
-  
-  .status-delivered {
+  .status-completed {
     background-color: #f6ffed;
     color: #52c41a;
   }

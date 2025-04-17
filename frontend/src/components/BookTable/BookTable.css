@@ -1,0 +1,34 @@
+.card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .value {
+    color: #555;
+  }
+
+  .container-booking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-booking h3 {
+    margin: 100px 0px;
+}

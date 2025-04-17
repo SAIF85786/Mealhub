@@ -11,6 +11,7 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const itemId = action.payload;
       state.cart[itemId] = (state.cart[itemId] || 0) + 1;
+      console.log(state.cart[itemId]);
     },
     removeFromCart: (state, action) => {
       const itemId = action.payload;

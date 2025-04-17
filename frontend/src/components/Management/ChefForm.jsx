@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Modal, Spinner } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { fetchChefs } from "../../store/slices/userSlice";
 const MealHubBackend = import.meta.env.VITE_BACKEND_SERVER;
 
 export default function ChefForm({ show, handleClose }) {
@@ -19,6 +21,7 @@ export default function ChefForm({ show, handleClose }) {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,6 +67,7 @@ export default function ChefForm({ show, handleClose }) {
           password: "",
           confirmPassword: "",
         });
+        dispatch(fetchChefs());
       } else {
         alert(`Error: ${data.message}`);
       }

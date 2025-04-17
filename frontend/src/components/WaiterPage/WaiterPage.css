@@ -1,0 +1,32 @@
+.waiterpage {
+    width: 50%;
+    margin: auto auto;
+}
+  
+.waiterpage .section {
+    padding: 1rem;
+    border-radius: 10px;
+    height: calc(100vh - 56px - 2rem);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.waiterpage .section .list {
+    overflow-y: auto;
+    margin-top: 1rem;
+    height: calc(100% - 50px);
+}
+  
+.waiterpage .section .list::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.waiterpage .section .list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+  
+.waiterpage .section .list::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 8px;
+}

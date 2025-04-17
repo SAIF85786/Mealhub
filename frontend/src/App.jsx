@@ -11,7 +11,7 @@ import Home from "./components/Home/Home";
 import Order from "./components/Order/Order";
 import Management from "./components/Management/Management";
 import BookTable from "./components/BookTable/BookTable";
-import SelectRole from "./components/SelectRole";
+import SelectRole from "./components/SelectRole/SelectRole";
 import { useEffect } from "react";
 import { changeRole } from "./store/slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,15 +36,20 @@ function App() {
     const role = Cookies.get("role");
     if (role) {
       dispatch(changeRole(role));
+      // if (role === "Select Role") navigate("/select-role");
     } else {
       navigate("/select-role");
     }
   }, []);
   useEffect(() => {
-    if (role === "Manager") navigate("/management");
-    else if (role === "Waiter") navigate("/waiter");
-    else if (role === "Chef") navigate("/chef");
-  }, [role]);
+    if (location.pathname === "/" || location.pathname === "/select-role") {
+      if (role === "Manager") navigate("/management");
+      else if (role === "Waiter") navigate("/waiter");
+      else if (role === "Chef") navigate("/chef");
+      else if (role === "Customer") navigate("/");
+      else if (role === "Select Role") navigate("/select-role");
+    }
+  }, [role, location.pathname]);
   return (
     <>
       {location.pathname !== "/payment" && <MyNavbar />}
